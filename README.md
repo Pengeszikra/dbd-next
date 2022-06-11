@@ -11,3 +11,6 @@ DBD.db seems promisiong lightweight nodejs module DB
 > [dbd.db npm module](https://github.com/Leref/dbd.js)
 > I'm afraid long database storage maybe questionable, but time can reval the truth
   
+## Other DB possibilities
+- [realm-database](https://www.npmjs.com/package/realm)
+- [lokijs](https://www.npmjs.com/package/lokijs)

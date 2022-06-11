@@ -23,11 +23,11 @@ const Home: NextPage = () => {
 
         <div className={styles.grid}>
           <a href="https://www.npmjs.com/package/dbd.db"  target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>NPM package &rarr;</h2>
+            <h2>NPM package →</h2>
             <p>DBD.db seems interesting small database maybe fit for nextjs</p>
           </a>
           <a href="https://github.com/Leref/dbd.js"  target="_blank" rel="noreferrer" className={styles.card}>
-            <h2>Github &rarr;</h2>
+            <h2>Github →</h2>
             <p>I'm afraid long database storage maybe questionable, but time can reval the truth</p>
           </a>
         </div>
