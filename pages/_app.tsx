@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     let wsServer = 'ws:/188.166.45.33:8080';
     let ws = new WebSocket(wsServer);
 
-    ws.onerror = console.warn;
+    ws.onerror = () => ws.close();
     ws.onopen = () => {
       console.log('-- connection already maded --');
       setSocket(ws);
