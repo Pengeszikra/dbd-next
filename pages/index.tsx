@@ -17,7 +17,7 @@ const Home: NextPage = ({socket}) => {
   return (
     <section>
       <Head>
-        <title>DB demonstartor</title>
+        <title>DB demonstartor + WS</title>
         <meta name="description" content="will be db demonstartor" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
