@@ -3,10 +3,16 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react';
 
+interface InputEvent {
+  target: {
+    value: string;
+  }
+}
+
 const Home: NextPage<{socket:any}> = ({socket}) => {
 
   const [message, setMessage] = useState("");
-  const handleChangeMessage = ({target:{value}}) => setMessage(value)
+  const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const sendMessageToSocket = () => {
     if (socket) {
       socket.send(message);
