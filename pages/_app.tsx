@@ -6,6 +6,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const [socket, setSocket] = useState<any>(null);
 
   useEffect(() => {
+    if (global?.location?.protocol !== 'http:') return null;
+    
     let wsServer = 'ws:/188.166.45.33:8080';
     let ws = new WebSocket(wsServer);
 
@@ -16,7 +18,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     }
 
     return () => ws.close();
-
   }, [])
 
   const socketAdded = {socket, ...pageProps};
