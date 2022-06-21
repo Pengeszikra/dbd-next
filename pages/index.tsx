@@ -12,7 +12,7 @@ interface InputEvent {
 
 // let db:any = null;
 
-const Home: NextPage<{socket:any}> = () => {
+const Home: NextPage<{list:[]}> = ({list}) => {
 
   const [message, setMessage] = useState("");
   const [blog, readBlog] = useState([]);
@@ -22,22 +22,6 @@ const Home: NextPage<{socket:any}> = () => {
       setMessage("");
     }
   }
-
-//   useEffect(async () => {
-//     db = await connectToDatabase();
-//   }, []);
-// 
-//   useEffect(() => {
-//     if (!db) return;
-//     // let { db } = await connectToDatabase();
-//     const listQuery = async () => {
-//       const list = await db.collection("list").find({},{projection:{_id:0}}).toArray();
-//       console.log(list)
-//       readBlog(list);
-//     };
-// 
-//     listQuery();
-//   }, [db])
 
   return (
     <section>
@@ -57,7 +41,7 @@ const Home: NextPage<{socket:any}> = () => {
           <button onClick={sendMessageToSocket} className="p-2 border-2 hover:bg-slate-100">send</button>
         </div>
 
-        <pre>{JSON.stringify(blog, null, 2)}</pre>
+        <pre>{JSON.stringify(list, null, 2)}</pre>
 
         <div className="border-2 rounded-lg p-2 grid grid-flow-col w-8/12 m-8">
           <div className='p-4 rounded-lg border-2 m-2 hover:bg-slate-100'>
@@ -80,3 +64,14 @@ const Home: NextPage<{socket:any}> = () => {
 }
 
 export default Home
+
+export async function getServerSideProps(context) {
+  const {db} = await connectToDatabase();
+
+  let list = await db.collection("list").find({}).toArray();
+  // users = JSON.parse(JSON.stringify(users));
+
+  return {
+    props: { list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})) },
+  };
+}
