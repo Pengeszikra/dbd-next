@@ -10,11 +10,16 @@ interface InputEvent {
   }
 }
 
-const Home: NextPage<{list:[], db:any}> = ({list, db}) => {
+// let DB:any = null;
+
+const Home: NextPage<{list:[]}> = ({list}) => {
 
   const [message, setMessage] = useState("");
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const sendMessageToSocket = () => {
+    // if (DB) {
+    //   DB.insertOne({msg: message, sendedBy:'--code--'});
+    // }
     setMessage("");
   }
 
@@ -65,16 +70,17 @@ const Home: NextPage<{list:[], db:any}> = ({list, db}) => {
   )
 }
 
-export default Home
+export default Home;
 
 export async function getServerSideProps(context:any) {
   const {db} = await connectToDatabase();
 
+  // DB = db;
+
   let list = await db.collection("list").find({}).toArray();
 
   return {
-    props: { 
-      db,
+    props: {
       list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})),
     },
   };
