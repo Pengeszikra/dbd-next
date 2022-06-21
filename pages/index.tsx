@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { connectToDatabase } from '../lib/mongodb';
 
 interface InputEvent {
   target: {
@@ -9,27 +10,45 @@ interface InputEvent {
   }
 }
 
-const Home: NextPage<{socket:any}> = ({socket}) => {
+// let db:any = null;
+
+const Home: NextPage<{socket:any}> = () => {
 
   const [message, setMessage] = useState("");
+  const [blog, readBlog] = useState([]);
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const sendMessageToSocket = () => {
-    if (socket) {
-      socket.send(message);
+    if (db) {
       setMessage("");
     }
   }
 
+//   useEffect(async () => {
+//     db = await connectToDatabase();
+//   }, []);
+// 
+//   useEffect(() => {
+//     if (!db) return;
+//     // let { db } = await connectToDatabase();
+//     const listQuery = async () => {
+//       const list = await db.collection("list").find({},{projection:{_id:0}}).toArray();
+//       console.log(list)
+//       readBlog(list);
+//     };
+// 
+//     listQuery();
+//   }, [db])
+
   return (
     <section>
       <Head>
-        <title>DB demonstartor + WS</title>
+        <title>next of Mongo:cloud</title>
         <meta name="description" content="will be db demonstartor" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center py-2">
-        <h1 className="text-4xl font-bold p-4">DB + Nextjs + Tailwind <a href="https://nextjs.org" className="text-blue-600">DBD.db + VPS!</a></h1>
+        <h1 className="text-4xl font-bold p-4">Nextjs + Tailwind with <a href="https://nextjs.org" className="text-blue-600">Mongo:cloud!</a></h1>
         <p className="m-2">Lets exploration begin!</p>
 
         <div className="p-4 rounded-lg border-2 m-2 flex gap-2">
@@ -38,6 +57,7 @@ const Home: NextPage<{socket:any}> = ({socket}) => {
           <button onClick={sendMessageToSocket} className="p-2 border-2 hover:bg-slate-100">send</button>
         </div>
 
+        <pre>{JSON.stringify(blog, null, 2)}</pre>
 
         <div className="border-2 rounded-lg p-2 grid grid-flow-col w-8/12 m-8">
           <div className='p-4 rounded-lg border-2 m-2 hover:bg-slate-100'>
