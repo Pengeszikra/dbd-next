@@ -10,9 +10,7 @@ interface InputEvent {
   }
 }
 
-// let db:any = null;
-
-const Home: NextPage<{list:[]}> = ({list}) => {
+const Home: NextPage<{list:[], db:any}> = ({list, db}) => {
 
   const [message, setMessage] = useState("");
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
@@ -38,7 +36,14 @@ const Home: NextPage<{list:[]}> = ({list}) => {
           <button onClick={sendMessageToSocket} className="p-2 border-2 hover:bg-slate-100">send</button>
         </div>
 
-        <pre>{JSON.stringify(list, null, 2)}</pre>
+        <pre className='w-8/12'>{list.map(
+          ({msg, sendBy, id}) => (
+            <div key={id} className='p-4 rounded-lg border-2 m-2 hover:bg-slate-100 flex'>
+              <div className='rounded-sm bg-slate-300 p-2'>{sendBy}</div>
+              <div className='p-2 whitespace-normal'>{msg}</div>
+            </div>
+          )
+        )}</pre>
 
         <div className="border-2 rounded-lg p-2 grid grid-flow-col w-8/12 m-8">
           <div className='p-4 rounded-lg border-2 m-2 hover:bg-slate-100'>
@@ -66,9 +71,11 @@ export async function getServerSideProps(context:any) {
   const {db} = await connectToDatabase();
 
   let list = await db.collection("list").find({}).toArray();
-  // users = JSON.parse(JSON.stringify(users));
 
   return {
-    props: { list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})) },
+    props: { 
+      db,
+      list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})),
+    },
   };
 }
