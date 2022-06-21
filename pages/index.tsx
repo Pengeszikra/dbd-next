@@ -15,12 +15,9 @@ interface InputEvent {
 const Home: NextPage<{list:[]}> = ({list}) => {
 
   const [message, setMessage] = useState("");
-  const [blog, readBlog] = useState([]);
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const sendMessageToSocket = () => {
-    if (db) {
-      setMessage("");
-    }
+    setMessage("");
   }
 
   return (
