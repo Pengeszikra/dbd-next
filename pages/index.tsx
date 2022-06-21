@@ -62,7 +62,7 @@ const Home: NextPage<{list:[]}> = ({list}) => {
 
 export default Home
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context:any) {
   const {db} = await connectToDatabase();
 
   let list = await db.collection("list").find({}).toArray();
