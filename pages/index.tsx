@@ -1,8 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { useState, useEffect } from 'react';
-import { connectToDatabase } from '../lib/mongodb';
 
 interface InputEvent {
   target: {
@@ -10,16 +8,30 @@ interface InputEvent {
   }
 }
 
-const Home: NextPage<{list:[]}> = ({list}) => {
+interface Message { msg: string; sendBy: string; }
 
-  const [senderName, setSenderName] = useState("another-name");
+const Home: NextPage = () => {
+
+  const [senderName, setSenderName] = useState("guest");
   const [message, setMessage] = useState("");
+  const [list, setList] = useState<Message[]>([]);
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const handleChangeSender = (event:InputEvent) => setSenderName(event?.target?.value)
+
+  useEffect(() => {
+    fetch(`/api/message`)
+      .then(r => r.json())
+      .then(setList)
+  }, []);
+  
   const sendMessageToSocket = () => {
     if (message && senderName) {
       fetch(`/api/message?msg=${message}&sendBy=${senderName}`)
-        .then(() => setMessage(""));
+        .then(r => r.json())
+        .then((result) => {
+          setList(result);
+          setMessage("");
+        });
     };
   }
 
@@ -58,17 +70,15 @@ const Home: NextPage<{list:[]}> = ({list}) => {
 
 export default Home;
 
-export const getServerSideProps = async (context:any) => {
-  const {db} = await connectToDatabase();
-
-  // DB = db;
-
-  let list = await db.collection("list").find({}).toArray();
-
-  return {
-    props: {
-      list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})),
-    },
-  };
-}
+// export const getServerSideProps = async (context:any) => {
+//   const {db} = await connectToDatabase();
+// 
+//   let list = await db.collection("list").find({}).toArray();
+// 
+//   return {
+//     props: {
+//       list:list.map(({_id, ...rest}, index) => ({id: _id.toString(), ...rest})),
+//     },
+//   };
+// }
 
