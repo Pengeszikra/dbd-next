@@ -8,7 +8,11 @@ interface InputEvent {
   }
 }
 
-interface Message { msg: string; sendBy: string; }
+interface Message { 
+  id:string; 
+  sendBy: string; 
+  msg: string; 
+}
 
 const Home: NextPage = () => {
 

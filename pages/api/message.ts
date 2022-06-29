@@ -16,9 +16,14 @@ export default async function handler(
   }
 
   const result = await listCollection
-    .find({},{projection:{_id:0}})
+    .find({})
     .toArray()
   ;
 
-  res.status(200).json([...result].reverse());
+  const resultWithId = result
+    .map(({_id, ...rest}) => ({id: _id.toString(), ...rest}))
+    .reverse()
+  ;
+
+  res.status(200).json(resultWithId);
 }
