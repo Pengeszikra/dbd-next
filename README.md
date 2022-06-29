@@ -1,6 +1,8 @@
 # Find the right lightweight DB for NEXTjs
 
-DBD.db seems promisiong lightweight nodejs module DB
+**first impression**: DBD.db seems promisiong lightweight nodejs module DB
+
+Nextjs a littlebit strange handle the npm package so I switch from `dbd.db` to `mongodb:cloud`
 
 
 > NPM package
@@ -12,5 +14,6 @@ DBD.db seems promisiong lightweight nodejs module DB
 > I'm afraid long database storage maybe questionable, but time can reval the truth
   
 ## Other DB possibilities
+- [mongodb](https://www.mongodb.com/)
 - [realm-database](https://www.npmjs.com/package/realm)
 - [lokijs](https://www.npmjs.com/package/lokijs)
