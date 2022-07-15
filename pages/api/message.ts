@@ -15,12 +15,13 @@ export default async function handler(
 
   const result = await db.collection("list")
     .find({})
+    .sort({$natural:-1})
+    .limit(22)
     .toArray()
   ;
  
   const resultWithId = result
     .map(({_id, ...rest}) => ({id: _id.toString(), ...rest}))
-    .reverse()
   ;
 
   res.status(200).json(resultWithId);

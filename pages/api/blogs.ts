@@ -7,7 +7,11 @@ export default async function handler(
 ) {
   let { db } = await connectToDatabase();
 
-  const list = await db.collection("list").find({},{projection:{_id:0}}).toArray();
+  const list = await db.collection("list")
+    .find({},{projection:{_id:0}})
+    .sort({$natural:-1})
+    .limit(22)
+    .toArray();
 
   res.status(200).json({ list });
 }

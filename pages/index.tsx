@@ -35,11 +35,11 @@ const Home: NextPage<BlogProps> = ({firstList = []}) => {
   
   const sendMessageToSocket = () => {
     if (message && senderName) {
+      setMessage("");
       fetch(`/api/message?msg=${message}&sendBy=${senderName}`)
         .then(r => r.json())
         .then((result) => {
           setList(result);
-          setMessage("");
         });
     };
   }
@@ -82,7 +82,11 @@ export default Home;
 export const getServerSideProps = async (context:any) => {
   const {db} = await connectToDatabase();
 
-  let list = await db.collection("list").find({}).toArray();
+  let list = await db.collection("list")
+    .find({})
+    .limit(22)
+    .sort({$natural:-1})
+    .toArray();
 
   return {
     props: {
