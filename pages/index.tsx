@@ -53,6 +53,12 @@ const Home: NextPage<BlogProps> = ({firstList = []}) => {
       </Head>
 
       <main className="flex min-h-screen flex-col items-center justify-center py-2 dark:text-purple-300">
+        <section className='grid grid-cols-2 gap-4 items-center'>
+          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>🤪</figure>
+          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>🥸</figure>
+          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>😤</figure>
+          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>😳</figure>
+        </section>
         <h1 className="text-4xl font-bold p-4">Nextjs + Tailwind + <a href="https://nextjs.org" className="text-indigo-600">Mongo:cloud!</a></h1>
         {/* <p className="m-2">Lets exploration begin!</p> */}
 
