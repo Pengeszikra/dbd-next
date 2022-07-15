@@ -54,25 +54,25 @@ const Home: NextPage<BlogProps> = ({firstList = []}) => {
 
       <main className="flex min-h-screen flex-col items-center justify-center py-2 dark:text-purple-300">
         <section className='grid grid-cols-2 gap-4 items-center'>
-          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>🤪</figure>
-          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>🥸</figure>
-          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>😤</figure>
-          <figure className='h-16 w-16 rounded-full bg-emerald-700 grid items-center text-center text-4xl font-bold'>😳</figure>
+          <figure className='h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>🤪</figure>
+          <figure className='h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>🥸</figure>
+          <figure className='h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>😤</figure>
+          <figure className='h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>😳</figure>
         </section>
         <h1 className="text-4xl font-bold p-4">Nextjs + Tailwind + <a href="https://nextjs.org" className="text-indigo-600">Mongo:cloud!</a></h1>
         {/* <p className="m-2">Lets exploration begin!</p> */}
 
         <div className="p-4 rounded-lg m-2 flex justify-items-stretch gap-2  md:w-8/12 w-full dark:bg-indigo-800 dark:text-purple-200">
           {/* <span className="grid items-center h-10" >message : </span> */}
-          <input onChange={handleChangeSender} className="p-2 text-center dark:bg-indigo-700 w-1/3" type="text" value={senderName} />
+          <input onChange={handleChangeSender} className="p-2 text-center bg-gradient-to-l from-indigo-600 to-purple-700 w-1/3" type="text" value={senderName} />
           <input onChange={handleChangeMessage} className="p-2 dark:bg-indigo-700 w-full" type="text" value={message} />
           <button onClick={sendMessageToSocket} className="p-2 dark:bg-indigo-600 w-1/3" >send</button>
         </div>
 
         <pre className=' md:w-8/12'>{list.map(
           ({msg, sendBy, id}) => (
-            <div key={id} className='p-4 rounded-lg m-2 hover:bg-purple-700 bg-gradient-to-l from-purple-700 to-purple-800 flex'>
-              <div className='rounded-sm bg-gradient-to-l from-neutral-900 to-neutral-800 p-2'>{sendBy}</div>
+            <div key={id} className='rounded-lg my-2 bg-gradient-to-l from-purple-600 to-purple-900 hover:from-purple-500 hover:to-purple-800 flex'>
+              <div className='rounded-lg m-1 mx-2 p-2  bg-gradient-to-l from-purple-800 to-indigo-600'>{sendBy}</div>
               <div className='p-2 whitespace-normal'>{msg}</div>
             </div>
           )
