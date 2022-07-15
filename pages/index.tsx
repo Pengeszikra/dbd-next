@@ -15,7 +15,11 @@ interface Message {
   msg: string; 
 }
 
-const Home: NextPage = ({firstList = []}) => {
+interface BlogProps { 
+  firstList: Message[]; 
+}
+
+const Home: NextPage<BlogProps> = ({firstList = []}) => {
 
   const [senderName, setSenderName] = useState("guest");
   const [message, setMessage] = useState("");
