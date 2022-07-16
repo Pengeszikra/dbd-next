@@ -49,7 +49,7 @@ const Home: NextPage<BlogProps> = ({firstList = []}) => {
       <main className="flex min-h-screen flex-col items-center justify-center py-2 dark:text-purple-300">
         <section className='grid grid-cols-2 gap-4 items-center'>
           <figure className='pointer-events-none h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>🤪</figure>
-          <Link href="/about">
+          <Link href="/other">
           <figure className='h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold cursor-pointer'>🥸</figure>
           </Link>
           <figure className='pointer-events-none h-16 w-16 rounded-full bg-indigo-700 grid items-center text-center text-4xl font-bold'>😤</figure>
