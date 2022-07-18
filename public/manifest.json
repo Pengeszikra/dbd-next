@@ -1,0 +1,23 @@
+{
+  "name": "Ex DBD",
+  "short_name": "Ex DBD",
+  "icons": [
+    {
+      "src": "/icons8-joe-pineapples-80.png",
+      "sizes": "80x80",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons8-joe-pineapples-240.png",
+      "sizes": "240x240",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait"
+}
