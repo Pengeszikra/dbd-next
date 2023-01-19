@@ -28,7 +28,8 @@ req: NextApiRequest,
     }
   )
   .then(r => r.json())
-  .then(msg => res.status(200).json(msg?.choices?.[0]?.text))
+  .then(msg => res.status(200).json(msg?.choices?.[0]?.text || '- - no answer - -'))
+  // .then(msg => res.status(200).json(msg))
   .catch(error => res.status(404).json(error))
 
   // return res.status(200).json({msg: req.query.seek});
