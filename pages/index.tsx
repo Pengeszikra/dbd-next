@@ -26,22 +26,20 @@ const Home: NextPage<BlogProps> = ({firstList = []}) => {
   const [list, setList] = useState<Message[]>(firstList);
   const handleChangeMessage = (event:InputEvent) => setMessage(event?.target?.value)
   const handleChangeSender = (event:InputEvent) => setSenderName(event?.target?.value)
-
-  // useEffect(() => {
-  //   fetch(`/api/message`)
-  //     .then(r => r.json())
-  //     .then(setList)
-  // }, []);
   
-  const sendMessageToSocket = () => {
-    if (message && senderName) {
-      setMessage("");
-      fetch(`/api/message?msg=${message}&sendBy=${senderName}`)
-        .then(r => r.json())
-        .then((result) => {
-          setList(result);
-        });
-    };
+  const sendMessageToSocket = async () => {
+    if (!message || !senderName) return;
+
+    setMessage("");
+
+    const [sender, ai] = senderName.split(' ');
+
+    fetch(`/api/message?msg=${message}&sendBy=${sender}`).then(r => r.json()).then(setList);
+
+    if (ai && ai.toLowerCase() === 'ai') {
+      const msg = await fetch(`api/gpt?seek=${message}`).then(r => r.json())
+      fetch(`/api/message?msg=${msg}&sendBy=${ai}`).then(r => r.json()).then(setList);
+    }
   }
 
   return (
